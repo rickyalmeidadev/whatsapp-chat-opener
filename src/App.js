@@ -1,16 +1,17 @@
 import {useState} from 'react'
-import {mask, unmask} from './utils/phone'
+import * as WhatsAppConstants from './constants/whatsapp'
+import * as PhoneUtils from './utils/phone'
 
 const App = () => {
   const [phone, setPhone] = useState('')
 
   const handleChange = event => {
-    setPhone(mask(event.target.value))
+    setPhone(PhoneUtils.mask(event.target.value))
   }
 
   const handleSubmit = event => {
     event.preventDefault()
-    const url = `https://api.whatsapp.com/send?phone=${unmask(phone)}`
+    const url = `${WhatsAppConstants.URL}?phone=${PhoneUtils.unmask(phone)}`
     window.open(url, '_blank')
   }
 
