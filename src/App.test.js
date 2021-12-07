@@ -9,6 +9,6 @@ it('attemps to open the whatsapp link with the given phone number', () => {
   const phone = '11999999999'
   userEvent.type(screen.getByLabelText(/número/i), phone)
   userEvent.click(screen.getByRole('button', {name: /ir/i}))
-  const url = `${WhatsAppConstants.URL}?phone=${phone}`
+  const url = `${WhatsAppConstants.URL}?phone=+55${phone}`
   expect(window.open).toHaveBeenCalledWith(url, '_blank')
 })

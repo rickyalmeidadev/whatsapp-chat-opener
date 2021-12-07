@@ -11,7 +11,7 @@ const App = () => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    const url = `${WhatsAppConstants.URL}?phone=${PhoneUtils.unmask(phone)}`
+    const url = `${WhatsAppConstants.URL}?phone=+55${PhoneUtils.unmask(phone)}`
     window.open(url, '_blank')
   }
 
