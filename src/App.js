@@ -1,5 +1,7 @@
 import {useState} from 'react'
+import {logEvent} from 'firebase/analytics'
 import * as WhatsAppConstants from './constants/whatsapp'
+import {analytics} from './services/firebase'
 import * as PhoneUtils from './utils/phone'
 
 const App = () => {
@@ -11,7 +13,9 @@ const App = () => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    const url = `${WhatsAppConstants.URL}?phone=+55${PhoneUtils.unmask(phone)}`
+    const unmaskedPhone = PhoneUtils.unmask(phone)
+    const url = `${WhatsAppConstants.URL}?phone=+55${PhoneUtils.unmask(unmaskedPhone)}`
+    logEvent(analytics, 'generate_lead', {value: unmaskedPhone})
     window.open(url, '_blank')
   }
 
