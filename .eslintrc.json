@@ -1,3 +1,13 @@
 {
-  "extends": ["react-app", "react-app/jest"]
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["testing-library", "jest-dom", "prettier"],
+  "rules": {
+    "prettier/prettier": "error"
+  }
 }
