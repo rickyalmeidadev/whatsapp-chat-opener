@@ -1,5 +1,5 @@
 import {initializeApp} from 'firebase/app'
-import {getAnalytics} from 'firebase/analytics'
+import {getAnalytics, logEvent as analyticsLogEvent} from 'firebase/analytics'
 
 const options = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -12,3 +12,6 @@ const options = {
 
 export const app = initializeApp(options)
 export const analytics = getAnalytics(app)
+
+export const logEvent = (eventName, eventParams) =>
+  analyticsLogEvent(analytics, eventName, eventParams)

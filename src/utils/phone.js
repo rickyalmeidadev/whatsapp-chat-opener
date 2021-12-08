@@ -7,3 +7,5 @@ export const mask = value =>
     .replace(/(-\d{4})\d+?$/, '$1')
 
 export const unmask = value => value.replace(/\D/g, '')
+
+export const isValid = value => value.length === 15

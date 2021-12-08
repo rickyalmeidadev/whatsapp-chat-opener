@@ -1,11 +1,24 @@
-import {useState} from 'react'
-import {logEvent} from 'firebase/analytics'
+import {useEffect, useState} from 'react'
+import * as Errors from './constants/errors'
 import * as WhatsAppConstants from './constants/whatsapp'
-import {analytics} from './services/firebase'
+import * as Firebase from './services/firebase'
 import * as PhoneUtils from './utils/phone'
 
 const App = () => {
   const [phone, setPhone] = useState('')
+  const [touched, setTouched] = useState(false)
+  const [error, setError] = useState('')
+  const [isValid, setIsValid] = useState(false)
+
+  useEffect(() => {
+    const isValid = PhoneUtils.isValid(phone)
+    setError(isValid ? '' : Errors.INVALID_PHONE)
+    setIsValid(isValid)
+  }, [phone])
+
+  const handleBlur = event => {
+    setTouched(true)
+  }
 
   const handleChange = event => {
     setPhone(PhoneUtils.mask(event.target.value))
@@ -13,9 +26,14 @@ const App = () => {
 
   const handleSubmit = event => {
     event.preventDefault()
+    if (!isValid) {
+      setTouched(true)
+      setError(Errors.INVALID_PHONE)
+      return
+    }
     const unmaskedPhone = PhoneUtils.unmask(phone)
     const url = `${WhatsAppConstants.URL}?phone=+55${PhoneUtils.unmask(unmaskedPhone)}`
-    logEvent(analytics, 'generate_lead', {value: unmaskedPhone})
+    Firebase.logEvent('generate_lead', {value: unmaskedPhone})
     window.open(url, '_blank')
   }
 
@@ -27,10 +45,20 @@ const App = () => {
         name="phone"
         id="phone-input"
         placeholder="(xx) xxxxx-xxxx"
+        onBlur={handleBlur}
         onChange={handleChange}
         value={phone}
+        aria-errormessage="phone-error"
+        aria-invalid={Boolean(touched && error)}
       />
-      <button type="submit">Ir</button>
+      {touched && error && (
+        <span role="alert" id="phone-message">
+          {error}
+        </span>
+      )}
+      <button type="submit" disabled={!isValid}>
+        Ir
+      </button>
     </form>
   )
 }
