@@ -52,7 +52,7 @@ const App = () => {
         aria-invalid={Boolean(touched && error)}
       />
       {touched && error && (
-        <span role="alert" id="phone-message">
+        <span role="alert" id="phone-error">
           {error}
         </span>
       )}
