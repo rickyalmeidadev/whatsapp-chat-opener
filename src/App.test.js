@@ -34,3 +34,11 @@ it('disables the submit button until the phone number is valid', () => {
   userEvent.type(inputElement, number)
   expect(submitButtonElement).toBeEnabled()
 })
+
+it('cancels submit if the phone number is invalid', () => {
+  jest.spyOn(window, 'open').mockImplementation(jest.fn)
+  render(<App />)
+  userEvent.type(screen.getByLabelText(/número/i), '{enter}')
+  expect(window.open).not.toHaveBeenCalled()
+  expect(screen.getByRole('alert')).toHaveTextContent(Errors.INVALID_PHONE)
+})
