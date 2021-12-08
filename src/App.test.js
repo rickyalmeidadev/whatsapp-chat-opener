@@ -20,6 +20,7 @@ it('displays an error message after leave the input with invalid phone number', 
   const invalid = '11'
   userEvent.type(inputElement, invalid)
   fireEvent.blur(inputElement)
+  expect(inputElement).toHaveErrorMessage(Errors.INVALID_PHONE)
   expect(screen.getByRole('alert')).toHaveTextContent(Errors.INVALID_PHONE)
 })
 
@@ -40,5 +41,6 @@ it('cancels submit if the phone number is invalid', () => {
   render(<App />)
   userEvent.type(screen.getByLabelText(/número/i), '{enter}')
   expect(window.open).not.toHaveBeenCalled()
+  expect(screen.getByLabelText(/número/i)).toHaveErrorMessage(Errors.INVALID_PHONE)
   expect(screen.getByRole('alert')).toHaveTextContent(Errors.INVALID_PHONE)
 })
