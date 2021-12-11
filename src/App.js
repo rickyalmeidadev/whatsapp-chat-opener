@@ -42,7 +42,10 @@ const App = () => {
   return (
     <div className={styles.root}>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <img className={styles.logo} src={logo} alt="Logo" />
+        <header className={styles.header}>
+          <img className={styles.logo} src={logo} alt="Logo" />
+          <h1 className={styles.title}>WhatsApp Chat Opener</h1>
+        </header>
         <div className={styles.control}>
           <label className={styles.label} htmlFor="phone-input">
             Número
@@ -65,7 +68,7 @@ const App = () => {
             </span>
           )}
         </div>
-        <button className={styles.button} type="submit" disabled={!isValid}>
+        <button className={styles.button} type="submit">
           Ir
         </button>
       </form>
