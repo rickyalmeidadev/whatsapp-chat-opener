@@ -3,6 +3,8 @@ import * as Errors from './constants/errors'
 import * as WhatsAppConstants from './constants/whatsapp'
 import * as Firebase from './services/firebase'
 import * as PhoneUtils from './utils/phone'
+import logo from './assets/images/logo.png'
+import styles from './App.module.css'
 
 const App = () => {
   const [phone, setPhone] = useState('')
@@ -38,28 +40,36 @@ const App = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="phone-input">Número: </label>
-      <input
-        type="tel"
-        name="phone"
-        id="phone-input"
-        placeholder="(xx) xxxxx-xxxx"
-        onBlur={handleBlur}
-        onChange={handleChange}
-        value={phone}
-        aria-errormessage="phone-error"
-        aria-invalid={Boolean(touched && error)}
-      />
-      {touched && error && (
-        <span role="alert" id="phone-error">
-          {error}
-        </span>
-      )}
-      <button type="submit" disabled={!isValid}>
-        Ir
-      </button>
-    </form>
+    <div className={styles.root}>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <img className={styles.logo} src={logo} alt="Logo" />
+        <div className={styles.control}>
+          <label className={styles.label} htmlFor="phone-input">
+            Número
+          </label>
+          <input
+            className={styles.input}
+            type="tel"
+            name="phone"
+            id="phone-input"
+            placeholder="(xx) xxxxx-xxxx"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={phone}
+            aria-errormessage="phone-error"
+            aria-invalid={Boolean(touched && error)}
+          />
+          {touched && error && (
+            <span className={styles.error} role="alert" id="phone-error">
+              {error}
+            </span>
+          )}
+        </div>
+        <button className={styles.button} type="submit" disabled={!isValid}>
+          Ir
+        </button>
+      </form>
+    </div>
   )
 }
 
