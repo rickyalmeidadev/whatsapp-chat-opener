@@ -24,18 +24,6 @@ it('displays an error message after leave the input with invalid phone number', 
   expect(screen.getByRole('alert')).toHaveTextContent(Errors.INVALID_PHONE)
 })
 
-it('disables the submit button until the phone number is valid', () => {
-  render(<App />)
-  const submitButtonElement = screen.getByRole('button', {name: /ir/i})
-  const inputElement = screen.getByLabelText(/número/i)
-  const [ddd, number] = ['11', '9999999999']
-  expect(submitButtonElement).toBeDisabled()
-  userEvent.type(inputElement, ddd)
-  expect(submitButtonElement).toBeDisabled()
-  userEvent.type(inputElement, number)
-  expect(submitButtonElement).toBeEnabled()
-})
-
 it('cancels submit if the phone number is invalid', () => {
   jest.spyOn(window, 'open').mockImplementation(jest.fn)
   render(<App />)
