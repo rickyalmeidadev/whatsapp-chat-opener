@@ -64,7 +64,7 @@ const App = () => {
           />
           {touched && error && (
             <span className={styles.error} role="alert" id="phone-error">
-              {error}
+              * {error}
             </span>
           )}
         </div>
