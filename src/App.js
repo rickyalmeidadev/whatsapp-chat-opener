@@ -43,7 +43,7 @@ const App = () => {
     <div className={styles.root}>
       <form className={styles.form} onSubmit={handleSubmit}>
         <header className={styles.header}>
-          <img className={styles.logo} src={logo} alt="Logo" />
+          <img src={logo} alt="Logo" width="96px" height="96px" />
           <h1 className={styles.title}>WhatsApp Chat Opener</h1>
         </header>
         <div className={styles.control}>

@@ -26,11 +26,6 @@
   font-size: 1.6rem;
 }
 
-.logo {
-  max-width: 6rem;
-  width: 100%;
-}
-
 .control {
   display: flex;
   flex-direction: column;
